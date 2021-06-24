@@ -88,18 +88,13 @@ export default {
 			})
 		},
         UpLoadNoCropper(file) {
+			//上传文件一般都是用file类型的 此处这种写法只是为了效果
 			this.blobToDataURL(file).then((res) => {
 				this.$emit("getImgUrl", URL.createObjectURL(this.dataURLtoBlob(res)));
 			})
-			// this.blobToDataURL(file, (base64) => {
-			// 	console.log(base64);
-			// })
-			// console.log(file);
             // let t = this,
             //     params = new FormData();
-            // if (!file) return Toast.MessageInfo("请选择图片", "error");
             // params.append("file", file);
-			// this.$emit("getImgUrl", window.URL.createObjectURL(blob));
         },
 
         startCropper() {
@@ -165,6 +160,7 @@ export default {
                 this.gif.render();
             });
             this.gif.on("finished", (blob) => {
+				//上传文件一般都是用file类型的 此处这种写法只是为了效果
                 this.$emit("getImgUrl", window.URL.createObjectURL(blob));
 				Toast.MessageInfo("图片上传成功", "success", 4000);
 				this.isCropper = false
@@ -178,7 +174,7 @@ export default {
 			//将base64转化为blob再将其转为file
 			let t =this,
 				coverBase64 = t.cropper.getCroppedCanvas().toDataURL(`${t.imageType}`, 0.94),
-				//实际调试接口中一般用的文件格式，这会相当于一个例子
+				//上传文件一般都是用file类型的 此处这种写法只是为了效果
 			  	cover = new window.File([t.dataURLtoBlob(coverBase64)], "img.jpg", { type: t.imageType }); 
 				this.$emit("getImgUrl", URL.createObjectURL(this.dataURLtoBlob(coverBase64)))
 				Toast.MessageInfo("图片上传成功", "success", 4000)
